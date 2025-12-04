@@ -81,7 +81,7 @@ class InterviewApiService {
       { id: 'cs-2', question: 'Describe a time you went above and beyond for a customer.', category: 'behavioral', difficulty: 'mid', jobType: 'customer-service' },
       { id: 'cs-3', question: 'How do you prioritize multiple customer requests?', category: 'strategy', difficulty: 'mid', jobType: 'customer-service' },
       { id: 'cs-4', question: 'What tools do you use for customer support?', category: 'technical', difficulty: 'entry', jobType: 'customer-service' },
-      { id: 'cs-5', question: 'How do you handle a situation where you don\'t know the answer?', category: 'behavioral', difficulty: 'entry', jobType: 'customer-service' },
+      { id: 'cs-5', question: "How do you handle a situation where you don't know the answer?", category: 'behavioral', difficulty: 'entry', jobType: 'customer-service' },
     ],
     'general': [
       { id: 'gn-1', question: 'Tell me about yourself.', category: 'behavioral', difficulty: 'entry', jobType: 'general' },
@@ -107,7 +107,13 @@ class InterviewApiService {
    * Generate mock AI feedback for a response
    */
   private generateMockFeedback(questionId: string, response: string): AIFeedback {
-    const score = Math.floor(Math.random() * 4) + 6; // Score between 6-10
+    // Score constants for mock feedback generation
+    const MIN_SCORE = 6;
+    const SCORE_RANGE = 4; // Results in scores 6-10
+    const STRONG_SCORE_THRESHOLD = 8;
+    const CONCISE_RESPONSE_THRESHOLD = 100;
+
+    const score = Math.floor(Math.random() * SCORE_RANGE) + MIN_SCORE;
     const strengths = [
       'Clear communication',
       'Good structure',
@@ -128,9 +134,9 @@ class InterviewApiService {
       strengths,
       improvements,
       suggestions: `Your response demonstrates ${
-        score >= 8 ? 'strong' : 'good'
+        score >= STRONG_SCORE_THRESHOLD ? 'strong' : 'good'
       } understanding. ${
-        response.length > 100
+        response.length > CONCISE_RESPONSE_THRESHOLD
           ? 'Consider being more concise while maintaining key details.'
           : 'Try to elaborate more with specific examples.'
       }`,

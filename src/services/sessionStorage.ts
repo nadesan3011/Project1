@@ -46,6 +46,7 @@ class SessionStorageService {
         })),
       }));
     } catch {
+      // Return empty array if stored data is corrupted or invalid JSON
       return [];
     }
   }
@@ -94,6 +95,7 @@ class SessionStorageService {
         })),
       };
     } catch {
+      // Return null if stored data is corrupted or invalid JSON
       return null;
     }
   }
@@ -128,6 +130,7 @@ class SessionStorageService {
         createdAt: new Date(profile.createdAt),
       };
     } catch {
+      // Return null if stored data is corrupted or invalid JSON
       return null;
     }
   }
